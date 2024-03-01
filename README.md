@@ -17,7 +17,7 @@ conda create -n NLSExplorer-pyto python==3.7
 conda install pytorch torchvision torchaudio cudatoolkit -c pytorch -c nvidia
 ```
 note that this command is a general install chocice, we recommend you to https://pytorch.org/get-started/locally/
-to get the specific instruction.
+ to get the specific instruction.
 ```bash
 conda env update -f environment-pyto.yaml
 ```
@@ -38,7 +38,7 @@ conda install -c ostrokach dssp
     vim ~/.bashrc
     ```
     Add to the end of the file:
-    (the addres of my mkdssp is /home/server/miniconda3/envs/NLSExplorer-pyto/bin/mkdssp you can see it from the command "which mkdssp")
+    (the addres of my mkdssp is "/home/server/miniconda3/envs/NLSExplorer-pyto/bin/mkdssp" you can see it from the command "which mkdssp")
     ```bash
     export PATH=$PATH:/home/server/miniconda3/envs/NLSExplorer-pyto/bin/mkdssp
     ```
@@ -51,7 +51,7 @@ For DSSP usage, please refer to the website:
 (https://swift.cmbi.umcn.nl/gv/dssp/).
 
 ##  Python Environment Setup -step2
-### 1. Create Python 3.9 Environment
+### 1. Create Python 3.7 Environment
 ```bash
 conda create --name NLSExplorer-progres --clone NLSExplorer-pyto
 ```
