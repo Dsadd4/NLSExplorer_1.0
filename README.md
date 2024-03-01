@@ -1,6 +1,6 @@
-# Fragment Recommendation System Environment Setup
+# Nuclear Localization Signal(NLS) Recommendation System Environment Setup
 
-This guide helps you set up the environment for a Fragment Recommendation System.
+This guide helps you set up the environment for NLSExplorer.
 
 ## Prerequisites
 Ensure that Anaconda or Miniconda is installed.
@@ -69,4 +69,3 @@ pip install fair-esm==2.0.0
 ## Running the System
 1. Place input(fasta form and pdb file) in `./DANN_union/sequence_input`.
 2. Run `python union_result.py` for computation. Results can be found in `./DANN_union/result`. Historical results are in `./DANN_union/result_his`.
-```
