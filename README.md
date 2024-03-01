@@ -66,10 +66,10 @@ pip install fair-esm==2.0.0
 
 ## File Downloads
 1. Download two files from [NLSExplorer Code](http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/code.html):
-   - **The NLSExplorer model**: Place it in the folder named "Peptide_recomendation".
-   - **loc_in_nucleus_with_pdb**: Put it in the folder named "progres" and extract it using appropriate commands (e.g., `unzip loc_in_nucleus_with_pdb`).
-   - **Dataset**: Put it in the folder named ".\A2KA\Dataset" and extract it using appropriate commands (e.g., `unzip xxx`).
-   - **databases**: Put it in the folder named ".\progres\progres" and extract it using appropriate commands (e.g., `unzip xxx`).
+   - **The NLSExplorer model**: Place it in the folder named "./Peptide_recomendation".
+   - **loc_in_nucleus_with_pdb**: Put it in the folder named "./progres" and extract it using appropriate commands (e.g., `unzip loc_in_nucleus_with_pdb`).
+   - **Dataset**: Put it in the folder named "./A2KA/Dataset" and extract it using appropriate commands (e.g., `unzip xxx`).
+   - **databases**: Put it in the folder named "./progres/progres" and extract it using appropriate commands (e.g., `unzip xxx`).
 
 
 ## Running the System
