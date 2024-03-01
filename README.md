@@ -18,7 +18,7 @@ conda install pytorch torchvision torchaudio cudatoolkit -c pytorch -c nvidia
 conda env update -f environment-pyto.yaml
 ```
 
-## DSSP Installation
+### 3. DSSP Installation
 - Install DSSP:
 ```bash
 conda install -c ostrokach dssp
@@ -41,8 +41,8 @@ conda install -c ostrokach dssp
     source ~/.bashrc
     ```
 
-For DSSP usage, please refer to these articles:
-- [A series of PDB related databases for everyday needs](https://swift.cmbi.umcn.nl/gv/dssp/).
+For DSSP usage, please refer to the website:
+(https://swift.cmbi.umcn.nl/gv/dssp/).
 
 ##  Python Environment Setup -step2
 ### 1. Create Python 3.9 Environment
@@ -64,6 +64,8 @@ pip install fair-esm==2.0.0
    - **loc_in_nucleus_with_pdb**: Put it in the folder named "progres" and extract it using appropriate commands (e.g., `unzip loc_in_nucleus_with_pdb`).
    - **Dataset**: Put it in the folder named ".\A2KA\Dataset" and extract it using appropriate commands (e.g., `unzip xxx`).
    - **databases**: Put it in the folder named ".\progres\progres" and extract it using appropriate commands (e.g., `unzip xxx`).
+
+
 ## Running the System
 1. Place input(fasta form and pdb file) in `./DANN_union/sequence_input`.
 2. Run `python union_result.py` for computation. Results can be found in `./DANN_union/result`. Historical results are in `./DANN_union/result_his`.
