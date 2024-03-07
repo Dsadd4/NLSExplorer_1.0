@@ -80,16 +80,16 @@ pip install fair-esm==2.0.0
 <!-- ![A2KA](./A2KA/A2KA.svg) -->
 
 <img src="./A2KA/A2KA.svg" alt="A2KA" width="888"/>
-1. Make sure pytorch is already installed 
-2. you can direcly import AK2A module , and AK2A can be specified by your own config
-
+1. Make sure pytorch is already installed.
+2. you can direcly import AK2A module , and AK2A can be specified by your own config.
+3. the config means the structure of your A2KA , the length of config means the number of layers, and the value 
+represents the number of basic units , for instance, the config = [6,12,12],means the structure has 3 layers,
+and the the first layer includes 6 neurons , second layer includes 12 neurons, third layer includes 12 neurons. 
 ```python
 from A2KA import A2KA
 hidden_dimention = 512
 config = [6,12,12,5]
 model =A2KA( hidden_dimention,config)
+```
 
-3. the config means the structure of your A2KA , the length of config means the number of layers, and the value 
-represents the number of basic units , for instance, the config = [6,12,12],means the structure has 3 layers,
-and the the first layer includes 6 neurons , second layer includes 12 neurons, third layer includes 12 neurons. 
 
