@@ -75,3 +75,6 @@ pip install fair-esm==2.0.0
 ## Running the System
 1. Place input(fasta form and pdb file) in `./DANN_union/sequence_input`.
 2. Run `python union_result.py` for computation. Results can be found in `./DANN_union/result`. Historical results are in `./DANN_union/result_his`.
+
+# Attention To Key Area （A2KA） Module 
+![A2KA](./A2KA/A2KA.svg)
