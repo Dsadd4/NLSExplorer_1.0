@@ -77,6 +77,6 @@ pip install fair-esm==2.0.0
 2. Run `python union_result.py` for computation. Results can be found in `./DANN_union/result`. Historical results are in `./DANN_union/result_his`.
 
 # Attention To Key Area （A2KA） Module 
-![A2KA](./A2KA/A2KA.svg)
+<!-- ![A2KA](./A2KA/A2KA.svg) -->
 
-<img src="./A2KA/A2KA.svg" alt="A2KA" width="500"/>
+<img src="./A2KA/A2KA.svg" alt="A2KA" width="800"/>
