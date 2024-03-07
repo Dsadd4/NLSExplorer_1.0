@@ -83,9 +83,9 @@ pip install fair-esm==2.0.0
 
 1. Make sure pytorch is already installed.
 
-2. you can direcly import AK2A module , and AK2A can be specified by your own config.
+2. You can direcly import AK2A module , and AK2A can be specified by your own config.
 
-3. the config means the structure of your A2KA , the length of config means the number of layers, and the value 
+3. The config means the structure of your A2KA , the length of config means the number of layers, and the value 
 represents the number of basic units , for instance, the config = [6,12,12],means the structure has 3 layers,
 and the the first layer includes 6 neurons , second layer includes 12 neurons, third layer includes 12 neurons. 
 
