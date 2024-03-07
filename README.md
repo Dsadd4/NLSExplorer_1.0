@@ -2,14 +2,17 @@
 
 This guide helps you set up the environment for NLSExplorer.
 
+Overview of NLSExplorer
 <img src="./image/simple-pipline.svg" alt="A2KA" width="888"/>
-Title Below the Image
----------------------
+
 
 ## Prerequisites
 Ensure that Anaconda or Miniconda is installed.
 
 ## Python Environment Setup -step1
+
+Pipeline
+<img src="./image/pipline.svg" alt="A2KA" width="888"/>
 
 ### 1. Create Python 3.7 Environment
 ```bash
