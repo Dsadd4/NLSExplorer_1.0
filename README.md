@@ -90,5 +90,6 @@ config = [6,12,12,5]
 model =A2KA( hidden_dimention,config)
 ```
 3.the config means the structure of your A2KA , the length of config means the number of layers, and the value 
-represents the number of basic units 
+represents the number of basic units , for instance, the config = [6,12,12],means the structure has 3 layers,
+and the the first layer includes 6 neurons , second layer includes 12 neurons, third layer includes 12 neurons. 
 
