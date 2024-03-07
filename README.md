@@ -3,6 +3,8 @@
 This guide helps you set up the environment for NLSExplorer.
 
 <img src="./image/simple-pipline.svg" alt="A2KA" width="888"/>
+Title Below the Image
+---------------------
 
 ## Prerequisites
 Ensure that Anaconda or Miniconda is installed.
