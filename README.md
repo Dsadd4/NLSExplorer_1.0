@@ -89,3 +89,6 @@ hidden_dimention = 512
 config = [6,12,12,5]
 model =A2KA( hidden_dimention,config)
 ```
+3.the config means the structure of your A2KA , the length of config means the number of layers, and the value 
+represents the number of basic units 
+
