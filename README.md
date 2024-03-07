@@ -2,7 +2,7 @@
 
 This guide helps you set up the environment for NLSExplorer.
 
-Overview of NLSExplorer
+Overview of NLSExplorer 
 <img src="./image/simple-pipline.svg" alt="A2KA" width="888"/>
 
 
@@ -11,7 +11,7 @@ Ensure that Anaconda or Miniconda is installed.
 
 ## Python Environment Setup -step1
 
-Pipeline
+Pipeline 
 <img src="./image/pipline.svg" alt="A2KA" width="888"/>
 
 ### 1. Create Python 3.7 Environment
@@ -102,5 +102,8 @@ hidden_dimention = 512
 config = [6,12,12,5]
 model =A2KA( hidden_dimention,config)
 ```
+
+4. The hidden_dimention means the input tensor of A2KA, and A2KA will output the enhanced representation ,and the 
+attention distribution along full sequence.
 
 
