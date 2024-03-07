@@ -3,8 +3,10 @@
 This guide helps you set up the environment for NLSExplorer.
 
 Overview of NLSExplorer 
+
 <img src="./image/simple-pipline.svg" alt="A2KA" width="888"/>
 
+see the detailed introduction at http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/introduction_new.html
 
 ## Prerequisites
 Ensure that Anaconda or Miniconda is installed.
