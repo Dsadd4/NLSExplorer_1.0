@@ -84,7 +84,7 @@ pip install fair-esm==2.0.0
 2.you can direcly import AK2A module , and AK2A can be specified by your own config
 
 ```bash
-From A2KA import A2KA
+from A2KA import A2KA
 hidden_dimention = 512
 config = [6,12,12,5]
 model =A2KA( hidden_dimention,config)
