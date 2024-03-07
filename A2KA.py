@@ -1,125 +1,17 @@
 import torch
-# model, alphabet = torch.hub.load("facebookresearch/esm:main", "esm1b_t33_650M_UR50S")
+
 device=torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 device2 = torch.device("cpu")
-from utils import get_data,generate_representation,getBatch,get_padding
-from model.attention.SelfAttention import ScaledDotProductAttention
-import torch
-#测试   定义第二类神经网络 无多头注意力版
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import numpy as np
-
-
-import pandas as pd
-
-
-
-
-from utils import save_mydict,load_mydict
-
-
-chosen = 5
-import pandas as pd
-
-
-# print(f'we have chosen {namelist[chosen]}')
-
-for item in zip(data['ACC'],data[namelist[chosen]]):
-    name2label[item[0]]=int(item[1])
-
-trainning_f = []
-for item in name_list:
-    trainning_f.append((name2label[item],name2seq[item]))
-
-
-
-
-
-#准备不同权值的loss表达
-import numpy as np
-
-# z = 1/(tran.sum(0)/tran.sum(0).max())
-# # print(z)
-# wei = torch.tensor(z)
-# print(k)
-def train(model, criterion, optimizer, vector, tags):
-    # print(vector)
-    vector = list(vector)+[torch.randn(1022,1280)]
-    # print(vector)
-    vector = pad_sequence(vector,batch_first=True).cuda().float()[:-1,:,:]
-    
-    # vector = vector.cuda().float()
-
-    tags = torch.tensor(tags).cuda()
-
-    model.zero_grad()
-    tag_scores,_ = model(vector)
-    print('---------*********--------')
-    print(tags[0:1])
-    print(tag_scores[0:1])
-
-    # 计算损失
-    # print(tag_scores.size())
-    
-    # print(tags.float().size())
-    #如果是单标签就要加个reshape(-1),多标签则不用加
-    loss = criterion(tag_scores.reshape(-1), tags.float())
-    # 后向传播
-    loss.backward()
-    # 更新参数
-    optimizer.step()
-
-    return model, loss
-
-from torch.nn.utils.rnn import pad_sequence,pack_sequence
-def begin_train_dur(mul_y, model2, optimizer, train_total,Batchsize,stages):
-    # 数据准备阶段
-    import random
-
-    torch.cuda.empty_cache()
-    total = train_total
-    # total = get_padding(train_total)
-
-    train_data = zip(total, mul_y)
-    trainning_data = []
-    for item in train_data:
-        trainning_data.append(item)
-    random.shuffle(trainning_data)
-
-    # 训练准备开始阶段
-
-    # model2 = torch.load('./test-3corevec+3mullable')
-    criterion = nn.BCELoss()
-
-    # 训练过程
-    for item in getBatch(Batchsize, trainning_data):
-        vector, tags = zip(*item)
-        model2, loss = train(model2, criterion, optimizer, vector, tags)
-        print(f"epochs:{stages}")
-        print(f'the loss is {loss}')
-        del vector, tags
-    return model2
-
-
-
 
 
 #正式模型部分
-#A2KA架构
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import numpy as np
+#A2KA Module
+
 torch.manual_seed(1)
-#测试   定义第二类神经网络 无多头注意力版
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.optim as optim
+
 import numpy as np
 torch.manual_seed(1)
 class Attention(nn.Module):
@@ -164,31 +56,21 @@ class Attention(nn.Module):
 #         print(sum.size())
         sum_ = self.layer_norm(sum_)
         return sum_,att_rate
-
-#测试   定义第二类神经网络 无多头注意力版
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import numpy as np
 torch.manual_seed(1)
 
 #下面这个是结合了LSTM与各个位置注意力机制的网络
-#下面这个是结合了LSTM与各个位置注意力机制的网络
-class LSTMTagger(nn.Module):
 
-    def __init__(self, embedding_dim, hidden_dim):
-        super(LSTMTagger, self).__init__()
-        self.Att_config = [64]*16
+class A2KA(nn.Module):
+
+    def __init__(self, hidden_dim,config):
+        super(A2KA, self).__init__()
+        self.Att_config = config
         self.dropout = nn.Dropout(p=0.1)
         self.hidden_dim = hidden_dim
 #         self.lstm = nn.LSTM(embedding_dim, hidden_dim,2,bidirectional=True,batch_first = True)
         
         # The linear layer that maps from hidden state space to tag space
         real_dim = hidden_dim
-
-
-        
         #储存attention 层的部分
         Att_li = []
         for fig in self.Att_config:
@@ -300,3 +182,8 @@ class LSTMTagger(nn.Module):
         P = torch.sigmoid(self.hidden2p(um_))
       
         return P,attention_dis
+    
+# example:
+# hidden_dimention = 512
+# config = [6,12,12,5]
+# model =A2KA( hidden_dimention,config)
