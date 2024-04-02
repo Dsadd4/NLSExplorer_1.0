@@ -22,6 +22,25 @@ python acc_calculation.py 0.3 hybrid
 python acc_calculation.py 0.3 yeast
 ```
 
+## Train the recommendation system on NLSExplorer-t
+
+You can train your own recommendation system, based on: 
+python {cofactor} {datasetname}
+
+
+```bash
+
+```
+
+but notethat, if you only want to train a new system based on the datasets we provide you can just run
+the script we provide, or you must know the structure of our data, and construct your own data first. our
+data is consist of very simple parts, you can know it by using the python code below and construct your own
+dataset
+```python
+from utils import load_mydict
+data = load_mydict('./for_recom/insp_train_0.6')
+print(data)
+```
 
 
 
