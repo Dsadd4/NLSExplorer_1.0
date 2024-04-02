@@ -27,7 +27,7 @@ python acc_calculation.py 0.3 yeast
 You can train your own recommendation system, based on: 
 python acc_calculation.py {cofactor} {datasetname}
 just need to uncomment      
-# torch.save(model.state_dict(), f'./resconn_{epoch}_nls_model_not_include') 
+torch.save(model.state_dict(), f'./resconn_{epoch}_nls_model_not_include') 
 at acc_calculation.py  921 lines
 
 but notethat, if you only want to train a new system based on the datasets we provide you can just run
