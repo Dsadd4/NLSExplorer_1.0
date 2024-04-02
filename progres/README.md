@@ -3,7 +3,7 @@ This folder include our recommendation system
 in the folder you can:
 1. test the NLSExplorer's accuracy at INSP dataset
 2. traing the recommendation system on your own parameter
-3. execute the ablation experiment for NLSExplorer
+3. run  ablation experiment for NLSExplorer
 
 ## Calculate the accuracy on INSP-dataset
 
@@ -12,7 +12,7 @@ training dataset is included.
 
 
 You can get the result below diffrent cofactor on the two datasets, based on: 
-python {cofactor} {datasetname}
+python acc_calculation.py {cofactor} {datasetname}
 
 ```bash
 conda activate progres
@@ -25,7 +25,7 @@ python acc_calculation.py 0.3 yeast
 ## Train the recommendation system on NLSExplorer-t
 
 You can train your own recommendation system, based on: 
-python {cofactor} {datasetname}
+python acc_calculation.py {cofactor} {datasetname}
 
 
 ```bash
@@ -42,7 +42,20 @@ data = load_mydict('./for_recom/insp_train_0.6')
 print(data)
 ```
 
+## run  ablation-experiment for NLSExplorer
 
+
+
+You can run ablation-experiment on the two datasets, based on: 
+python acc_ablation.py {cofactor} {datasetname}
+
+```bash
+conda activate progres
+#run ablation-experiment on hybrid-dataset
+python acc_ablation.py 0.3 hybrid
+#run ablation-experiment on yeast-dataset
+python acc_ablation.py 0.3 yeast
+```
 
 
 

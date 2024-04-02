@@ -950,12 +950,15 @@ parameter = sys.argv
 #最新推荐出来的数据
 fac = parameter[1]
 
+choose = parameter[2]
+
+if choose == "yeast":
 # insp_train = load_mydict(f'./for_recom/hybrd2_{fac}')
-insp_train = load_mydict(f'./for_recom/yeast_{fac}')
+    insp_train = load_mydict(f'./for_recom/yeast_{fac}')
+if choose == "hybrid":
+    insp_train = load_mydict(f'./for_recom/hybrd2_{fac}')
+
 data_store2,label_store2,tot_emb2 = get_data(insp_train)
-print(len(data_store2))
-
-
 # f = open('./record7.txt','w')
 
 t3,t2,t1 = get_result(data_store,tot_emb,data_store2,tot_emb2)
