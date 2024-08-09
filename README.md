@@ -50,7 +50,7 @@ conda env update -f environment-pyto.yaml
 
 3. The config means the structure of your A2KA , the length of config means the number of layers, and the value 
 represents the number of basic units , for instance, the config = [6,12,12],means the structure has 3 layers,
-and the the first layer includes 6 neurons , second layer includes 12 neurons, third layer includes 12 neurons. 
+and the the first layer includes 6 BAUs , second layer includes 12 BAUs, third layer includes 12 BAUs. 
 
 ```python
 from A2KA import A2KA
