@@ -32,10 +32,11 @@ conda env update -f environment-pyto.yaml
 ```
 
 ## File Downloads
-1. Download two files from [NLSExplorer Code](http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/code.html):
-   - **The NLSExplorer model**: Place it in the folder named "./Recommendation_system".
-  
-   - **Dataset**: Put it in the folder named "./A2KA_train/Dataset" and extract it using appropriate commands (e.g., `unzip xxx`).
+1. Download files from [NLSExplorer Code](http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/code.html):
+   - **The NLSExplorer model**: Place NLS_loc_modeltes in the folder named "./Recommendation_system".
+
+2. Download files from [NLSExplorer dataset](http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/dataset_new.html): 
+   - **Dataset**: Put NLSExplorer-p in the folder named "./A2KA_train/Dataset" and extract it using appropriate commands (e.g., `unzip xxx`).
 
 
 
