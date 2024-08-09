@@ -1,5 +1,5 @@
 # Train a A2KA on NLSExplorer-p dataset
-note that you firstly need to download NLSExplorer-t from http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/code.html
+note that you firstly need to download NLSExplorer-t from http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/dataset_new.html
 and extract it at "./Dataset".
 
 <img src="./dataset.png" alt="INSP" width="888"/>
