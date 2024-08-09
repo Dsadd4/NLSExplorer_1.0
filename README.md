@@ -29,6 +29,7 @@ note that this command is a general install chocice, we recommend you to https:/
  to get the specific instruction.
 ```bash
 conda env update -f environment-pyto.yaml
+```
 
 ## File Downloads
 1. Download two files from [NLSExplorer Code](http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/code.html):
