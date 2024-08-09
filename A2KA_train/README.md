@@ -2,8 +2,6 @@
 note that you firstly need to download NLSExplorer-t from http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/dataset_new.html
 and extract it at "./Dataset".
 
-<img src="./dataset.png" alt="INSP" width="888"/>
-
 befor you begin to train, you should make sure you have already set python environment rightly according to 
 https://github.com/Dsadd4/NLSExplorer_1.0.
 
