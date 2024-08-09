@@ -1,8 +1,8 @@
-# Nuclear Localization Signal(NLS) Recommendation System Environment Setup
+# Discovering nuclear localization signal universe through a novel deep learning model with interpretable attention units
 
 This guide helps you set up the environment for NLSExplorer.
 
-Discovering nuclear localization signal universe through a novel deep learning model with interpretable attention units
+
 
 
 <img src="./image/CandidateL.png" alt="Potential NLS universe" width="888"/>
