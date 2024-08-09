@@ -2,9 +2,10 @@
 
 This guide helps you set up the environment for NLSExplorer.
 
-Overview of NLSExplorer 
+Discovering nuclear localization signal universe through a novel deep learning model with interpretable attention units
 
-<img src="./image/simple-pipline.svg" alt="A2KA" width="888"/>
+
+<img src="./image/CandidateL.png" alt="Potential NLS universe" width="888"/>
 
 see the detailed introduction at http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/introduction_new.html
 
@@ -13,8 +14,7 @@ Ensure that Anaconda or Miniconda is installed.
 
 ## Python Environment Setup -step1
 
-Pipeline 
-<img src="./image/pipline.svg" alt="A2KA" width="888"/>
+
 
 ### 1. Create Python 3.7 Environment
 ```bash
