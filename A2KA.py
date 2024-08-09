@@ -57,9 +57,7 @@ class A2KA(nn.Module):
         self.Att_config = config
         self.dropout = nn.Dropout(p=0.1)
         self.hidden_dim = hidden_dim
-#         self.lstm = nn.LSTM(embedding_dim, hidden_dim,2,bidirectional=True,batch_first = True)
-        
-        # The linear layer that maps from hidden state space to tag space
+
         real_dim = hidden_dim
   
         Att_li = []
@@ -111,15 +109,11 @@ class A2KA(nn.Module):
         self.norm_li = nn.ModuleList([FeedForward_Norm(hidden_dim) for _ in range(len(self.Att_config))])
         # self.norm_li = nn.ModuleList([nn.LayerNorm(hidden_dim) for _ in range(len(self.Att_config))])
     def forward(self, embding):
-#         lstm_out, _ = self.lstm(embding)
-#         lstm_out = self.dropout(lstm_out)
+
         batch_size = (embding.size()[0])
         vec_store = []
-#         for_sum = torch.cat((embding,embding),2)
-        
-        
+
         t_emb = embding
-        origin_emb = t_emb
         attention_dis = []
         for i,fig in enumerate(self.Att_config):
             vec_s = []
@@ -159,7 +153,6 @@ class A2KA(nn.Module):
         um_ = torch.cat((sum_,ott),1)       
         um_ = self.dropout(um_)    
         P = torch.sigmoid(self.hidden2p(um_))
-      
         return P,attention_dis
     
 # example:
