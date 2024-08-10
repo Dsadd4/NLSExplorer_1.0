@@ -50,14 +50,20 @@ conda env update -f environment-pyto.yaml
 2. You can direcly import AK2A module , and AK2A can be specified by your own config.
 
 3. The config means the structure of your A2KA , the length of config means the number of layers, and the value 
-represents the number of basic units , for instance, the config = [6,12,12],means the structure has 3 layers,
-and the the first layer includes 6 BAUs , second layer includes 12 BAUs, third layer includes 12 BAUs. 
+represents the number of basic units , for instance, the config = [8,8,32],means the structure has 3 layers,
+and the the first layer includes 8 BAUs , second layer includes 8 BAUs, third layer includes 32 BAUs. 
 
 ```python
 from A2KA import A2KA
+import torch
 hidden_dimention = 512
-config = [6,12,12,5]
+config = [8,8,32]
 model =A2KA( hidden_dimention,config)
+exampletensor = torch.randn(5,100,512)
+prediction,layerattention = A2KA(exampletensor)
+print(prediction)
+print(layerattention)
+
 ```
 
 4. The hidden_dimention means the input tensor of A2KA, and A2KA will output the enhanced representation ,and the 
