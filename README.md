@@ -69,8 +69,3 @@ print(prediction)
 print(layerattention)
 
 ```
-
-4. The hidden_dimention means the input tensor of A2KA, and A2KA will output the enhanced representation ,and the 
-attention distribution along full sequence. Feel free to Integrate into any of your deep learning frameworks. 
-
-
