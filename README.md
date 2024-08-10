@@ -59,8 +59,9 @@ import torch
 hidden_dimention = 512
 config = [8,8,32]
 model =A2KA( hidden_dimention,config)
+# tensor in a shape of (Batchsize,sequence_length, embedding dimension)
 exampletensor = torch.randn(5,100,512)
-prediction,layerattention = A2KA(exampletensor)
+prediction,layerattention = model(exampletensor)
 print(prediction)
 print(layerattention)
 
