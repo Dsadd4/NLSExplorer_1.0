@@ -57,7 +57,10 @@ and the the first layer includes 8 BAUs , second layer includes 8 BAUs, third la
 from A2KA import A2KA
 import torch
 hidden_dimention = 512
+#configure your A2KA sturcture
 config = [8,8,32]
+#If your datasize is significant large, try to extend the scale of the network, such as config = 64*[64] which
+#means it has 64 layers and each layer has 64 basic attention unit.
 model =A2KA( hidden_dimention,config)
 # tensor in a shape of (Batchsize,sequence_length, embedding dimension)
 exampletensor = torch.randn(5,100,512)
@@ -68,6 +71,6 @@ print(layerattention)
 ```
 
 4. The hidden_dimention means the input tensor of A2KA, and A2KA will output the enhanced representation ,and the 
-attention distribution along full sequence.
+attention distribution along full sequence. Feel free to Integrate into any of your deep learning frameworks. 
 
 
