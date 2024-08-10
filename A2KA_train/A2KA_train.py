@@ -5,58 +5,11 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from utils import get_data, generate_representation, getBatch, get_padding
-
 device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 device2 = torch.device("cpu")
 torch.cuda.set_device(1)
-
 torch.manual_seed(1)
-
-
-
-BaseDir = './deeploc_dataset/'
-object = 'Swissprot_Train_Validation_dataset.csv'
-Path = BaseDir +object
-data = pd.read_csv(Path)
-namelist=[]
-for i in range(0,11):
-    namelist.append(data.columns[4:-1].values[i])
-
-
 from utils import save_mydict,load_mydict
-
-
-chosen = 5
-import pandas as pd
-BaseDir = './deeploc_dataset/'
-object = 'Swissprot_Train_Validation_dataset.csv'
-Path = BaseDir +object
-data = pd.read_csv(Path)
-name2seq = {}
-name2label = {}
-name_list = []
-for item in zip(data['ACC'],data['Sequence']):
-    name2seq[item[0]]=item[1]
-    name_list.append(item[0])
-
-namelist=[]
-for i in range(0,11):
-    namelist.append(data.columns[4:-1].values[i])
-
-print(namelist)
-
-print('-----------')
-
-
-# print(f'we have chosen {namelist[chosen]}')
-
-for item in zip(data['ACC'],data[namelist[chosen]]):
-    name2label[item[0]]=int(item[1])
-
-trainning_f = []
-for item in name_list:
-    trainning_f.append((name2label[item],name2seq[item]))
-
 
 
 
@@ -265,17 +218,7 @@ model2 = A2KA( EMB_DIM, 1280).cuda()
 learning_rate = 0.00001
 
 
-mul_y = []
-datts=[]
-for item in trainning_f:
-    mul_y.append(item[0])
-    datts.append(item[1])
 
-mul_datt=[]
-for item in datts:
-    if len(item)>=1023:
-        item = item[0:1022]
-    mul_datt.append(item)
     
 nucleus =  load_mydict('./Dataset/swiss_all_loc_in_nucleus')
 nucleus_not =  load_mydict('./Dataset/swiss_all_not_loc_in_nucleus')    
