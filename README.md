@@ -59,8 +59,8 @@ import torch
 hidden_dimention = 512
 #configure your A2KA sturcture
 config = [8,8,32]
-#If your datasize is significant large, try to extend the scale of the network, such as config = 64*[64] which
-#means it has 64 layers and each layer has 64 basic attention units.
+#If your datasize is significant large, extending the scale of the network may be a good choice.
+#Such a config = 18*[64] means it has 18 layers and each layer has 64 basic attention units.
 model =A2KA( hidden_dimention,config)
 # tensor in a shape of (Batchsize,sequence_length, embedding dimension)
 exampletensor = torch.randn(5,100,512)
