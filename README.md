@@ -47,7 +47,7 @@ conda env update -f environment-pyto.yaml
 
 1. Make sure pytorch is already installed.
 
-2. Once Pytorch is installed， you can directly install A2KA by run the command
+2. Once Pytorch is installed， you can directly install A2KA by run the command:
 ```bash
 pip install A2KA
 ```
