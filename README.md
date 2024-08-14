@@ -13,8 +13,8 @@ see the detailed introduction at http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer
 Ensure that Anaconda or Miniconda is installed.
 
 ## Python Environment Setup 
-
-
+If you have already installed pytorch with python version>=3.7 successfully, you can
+skip this step. 
 
 ### 1. Create Python 3.7 Environment
 ```bash
@@ -22,6 +22,7 @@ conda create -n NLSExplorer-pyto python==3.7
 ```
 
 ### 2. Install PyTorch and Dependencies
+
 ```bash
 conda install pytorch torchvision torchaudio cudatoolkit -c pytorch -c nvidia
 ```
