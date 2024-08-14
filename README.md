@@ -47,9 +47,15 @@ conda env update -f environment-pyto.yaml
 
 1. Make sure pytorch is already installed.
 
-2. You can direcly import AK2A module , and AK2A can be specified by your own config.
+2. Once Pytorch is installed， you can directly install A2KA by run the command
+```bash
+pip install A2KA
+```
 
-3. The config means the structure of your A2KA , the length of config means the number of layers, and the value 
+
+3. You can direcly import AK2A module , and AK2A can be specified by your own config.
+
+4. The config means the structure of your A2KA , the length of config means the number of layers, and the value 
 represents the number of basic units , for instance, the config = [8,8,32],means the structure has 3 layers,
 and the the first layer includes 8 BAUs , second layer includes 8 BAUs, third layer includes 32 BAUs. 
 
