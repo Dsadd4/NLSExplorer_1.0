@@ -94,10 +94,11 @@ def pos2seg(seq,listss):
     return res
 
 
-def process_segment(index, seg_li, f_ge,maxl):
+def process_segment(index, seg_li, f_ge,maxl,entropthss):
     liss = defaultdict(int)
     for i, seg in enumerate(seg_li):
-        local_liss = get_patterns(seg, {maxl: f_ge[maxl]}, {}, 2.5)
+        #This place to set the minimum entropy of discontinous
+        local_liss = get_patterns(seg, {maxl: f_ge[maxl]}, {}, entropthss)
         for key, value in local_liss.items():
             liss[key] += value
         print(f'Chunk {index}: process the {i+1} sequence')
@@ -109,7 +110,7 @@ def process_segment(index, seg_li, f_ge,maxl):
 
 
 
-def SCNLS_f(seq_li, f_ge, processnumber,maxl):
+def SCNLS_f(seq_li, f_ge, processnumber,maxl,entropthss):
     print(f'There are a total of {len(seq_li)} segments that need to be mined.')
     # Split the seq_li into processnumber pieces. 
     def chunks(data, n):
@@ -121,7 +122,7 @@ def SCNLS_f(seq_li, f_ge, processnumber,maxl):
 
     liss = defaultdict(int)
     with multiprocessing.Pool(processes=processnumber) as pool:
-        results = [pool.apply_async(process_segment, args=(i, chunk, f_ge,maxl)) for i, chunk in enumerate(chunked_seq_li)]
+        results = [pool.apply_async(process_segment, args=(i, chunk, f_ge,maxl,entropthss)) for i, chunk in enumerate(chunked_seq_li)]
         for i, result in enumerate(results):
             try:
                 segment_liss = result.get()
@@ -147,7 +148,7 @@ def SCNLS_f(seq_li, f_ge, processnumber,maxl):
 
 #Maxl indicates the length of the list, and k represents the maximum length for a gap or a single continuous segment.
 
-def function_mode(for_digg,k,maxl,processorsnumber):
+def function_mode(for_digg,k,maxl,processorsnumber,entropthss):
     
     f_ge = {}
     # k = 3
@@ -156,8 +157,10 @@ def function_mode(for_digg,k,maxl,processorsnumber):
     for l in range(1,maxl+1):
         combinations = generate_combinations( k,l)
         f_ge[l] = combinations
+
+    # print(f_ge)
     print(f"When the length of the k-th order subset is {k} and the maximum single item length is {l}, there are a total of {len(combinations)} possible scenarios.")
-    RE = SCNLS_f(for_digg, f_ge, processorsnumber,maxl)
+    RE = SCNLS_f(for_digg, f_ge, processorsnumber,maxl,entropthss)
 
     Show = 10
     for item in RE:
@@ -188,7 +191,8 @@ def main():
 
     # Parse parameters
     args = parser.parse_args()
-
+    #default entropy
+    entropthss = 0
     # Parameters usage
     print(f"Mode: {args.mode}")
     if args.mode == 'f':
@@ -201,13 +205,13 @@ def main():
         segment = list(data['Recommended Segment'])
         # print(segment)
         # assert(0)
-        function_mode(segment, args.kths, args.maxgap, args.processor)
+        function_mode(segment, args.kths, args.maxgap, args.processor,entropthss)
     elif args.mode == 's':
         # if not args.segment:
         #     parser.error("--segment is required when mode is 's'")
 
         for_digg = [args.material]
-        function_mode(for_digg, args.kths, args.maxgap, args.processor)
+        function_mode(for_digg, args.kths, args.maxgap, args.processor,entropthss)
 
     elif args.mode == 'n':
         from utils import load_mydict
@@ -222,7 +226,7 @@ def main():
             segmetl = pos2seg(seq,segls)
             transfered+=  segmetl
         # print(transfered)
-        function_mode(transfered, args.kths, args.maxgap, args.processor)
+        function_mode(transfered, args.kths, args.maxgap, args.processor,entropthss)
         pass
     else:
         parser.error(f"Invalid mode: {args.mode}")
@@ -237,3 +241,9 @@ if __name__ == "__main__":
 # python SCNLS.py --mode f  --material example.csv --maxgap 3 --kths 3 --processor 3
 # python SCNLS.py --mode n  --material 'Arabidopsis thaliana_0.5' --maxgap 3 --kths 3 --processor 10 
 # python SCNLS.py --mode s  --material KKKKRRRJJJJKSJSAIJCOSJAOJD --maxgap 3 --kths 3 --processor 1 
+"从上述的数据库的收集结果可以看出， 目前可靠的核定位信号的数目太少，这也是目前核定位信号预测方面的主要难点之一。 本文我主要是要利用 NLSdb2003 版以及 NLSdb 2017 版的核定位信号数据库来构建基于核定位信号与非核定位信号的分类模型的数据集。"
+
+'''python SCNLS.py --mode s  --material "从上述的数据库的收集结果可以看出， 目前可靠的核定位信号的数目太少，这也是目前核定位 信号预测方面的主要难点之一。 本文我主要是要利用 NLSdb2003 版以及 NLSdb 2017 版的核定位信号数据库来构建基于核定位信号与非核定位信号的分类模型的数据集。" --maxgap 5 --kths
+ 5 --processor 1'''
+
+''' python SCNLS.py --mode s  --material KKKKRRRJJrrJJccKSJSArrIJccCOSrrJAccOJDrrasccda --maxgap 3 --kths 3 --processor 1 '''
