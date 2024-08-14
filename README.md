@@ -12,7 +12,7 @@ see the detailed introduction at http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer
 ## Prerequisites
 Ensure that Anaconda or Miniconda is installed.
 
-## Python Environment Setup -step1
+## Python Environment Setup 
 
 
 
