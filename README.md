@@ -76,3 +76,14 @@ print(prediction)
 print(layerattention)
 
 ```
+
+
+## Search and collect NLS (SCNLS) algorithm 
+SCNLS is designed for the pattern analysis of NLS. Its default mode extracts discontinuous patterns based on the input key segment sets. In addition to file input, you can directly input a sequence of interest to analyze its pattern (this is not limited to NLS; any sequence can be input). By default, the top 10 most frequent patterns are displayed.
+
+```bash
+python SCNLS.py --mode f  --material example.csv --maxgap 3 --kths 3 --processor 3
+python SCNLS.py --mode n  --material 'Arabidopsis thaliana_0.5' --maxgap 3 --kths 3 --processor 10 
+python SCNLS.py --mode s  --material KKKKRRRJJJJKSJSAIJCOSJAOJD --maxgap 3 --kths 3 --processor 1 
+
+```
