@@ -1,6 +1,6 @@
 # Discovering nuclear localization signal universe through a novel deep learning model with interpretable attention units
 
-This guide helps you set up the environment for NLSExplorer.
+
 
 
 
@@ -8,6 +8,7 @@ This guide helps you set up the environment for NLSExplorer.
 <img src="./image/NLSExplorer.png" alt="Potential NLS universe" width="888"/>
 
 see the detailed introduction at http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/introduction_new.html
+Online calculation website http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/
 
 ## Prerequisites
 Ensure that Anaconda or Miniconda is installed.
