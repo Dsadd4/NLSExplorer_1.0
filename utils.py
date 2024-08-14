@@ -87,7 +87,7 @@ def generate_representation(labels, datt):
     sequence_representations = []
     sequence_total = []
     labels_list = []
-    # 这里有个老坑的点，datt[0:10]包含的最大下标只是datt[9],datt[10]不在里面
+    
     for i in tqdm(range(0, len(datt), 10),desc='processing'):
         data = list(zip(labels[i:i + 10], datt[i:i + 10]))
         batch_labels, batch_strs, batch_tokens = batch_converter(data)
@@ -132,7 +132,7 @@ def generate_representation_includtoken(labels, datt):
     sequence_total = []
     token_total = []
     labels_list = []
-    # 这里有个老坑的点，datt[0:10]包含的最大下标只是datt[9],datt[10]不在里面
+   
     for i in tqdm(range(0, len(datt), 10),desc='processing'):
         data = list(zip(labels[i:i + 10], datt[i:i + 10]))
         batch_labels, batch_strs, batch_tokens = batch_converter(data)
@@ -192,18 +192,7 @@ def getBatch(batch_size, train_data):
         batch = train_data[sindex:]
         yield batch
 
-# BaseDir = './deeploc_dataset/'
-# object = 'esm_embedding.txt'
-# Path = BaseDir +object
-# f = open(Path,'w')
-# #100 个序列需要712MB的存储空间 所以用这个方法不太现实
-# for k in range(len(train_total)):
-#     for item in train_total[k]:
-#         for j,i in enumerate(item.numpy()):
-#             f.write(str(i)+' ')
-#             if j>0 and j%20==0:
-#                 f.write('\n')
-# f.close()
+
 import numpy as np
 
 def get_padding(train_total):
