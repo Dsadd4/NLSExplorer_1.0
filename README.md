@@ -112,7 +112,7 @@ print(result)
 If you find the models useful in your research, we ask that you cite the relevant paper:
 
 ```bibtex
-@article{rives2019biological,
+@article{
   author={Yi-Fan Li, Xiaoyong Pan, and Hong-Bin Shen},
   title={Discovering nuclear localization signal universe through a novel deep learning model with interpretable attention units},
   year={2024},
