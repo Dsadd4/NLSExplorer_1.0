@@ -87,3 +87,21 @@ python SCNLS.py --mode n  --material 'Arabidopsis thaliana_0.5' --maxgap 3 --kth
 python SCNLS.py --mode s  --material KKKKRRRJJJJKSJSAIJCOSJAOJD --maxgap 3 --kths 3 --processor 1 
 
 ```
+You can directly import SCNLS into your workflow by install A2KA
+
+```bash
+pip install A2KA
+```
+
+expample:
+(in linux system)
+```python
+from A2KA import SCNLS
+#Example 
+sequence_for_analysis = ['MSSAKRRKK','LSSSSKVR','MTNLP']
+kth_set = 3
+max_gap = 3
+processorsnumber = 2
+result = SCNLS(sequence_for_analysis,kth_set,max_gap,processorsnumber)
+print(result)
+```
