@@ -8,6 +8,7 @@
 <img src="./image/NLSExplorer.png" alt="Potential NLS universe" width="888"/>
 
 see the detailed introduction at http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/introduction_new.html
+<br>
 Online calculation website http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/
 
 ## Prerequisites
