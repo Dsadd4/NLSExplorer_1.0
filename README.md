@@ -5,7 +5,7 @@ This guide helps you set up the environment for NLSExplorer.
 
 
 
-<img src="./image/CandidateL.png" alt="Potential NLS universe" width="888"/>
+<img src="./image/NLSExplorer.png" alt="Potential NLS universe" width="888"/>
 
 see the detailed introduction at http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/introduction_new.html
 
