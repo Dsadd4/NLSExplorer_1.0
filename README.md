@@ -79,6 +79,16 @@ print(layerattention)
 
 ```
 
+<img src="./image/Conception_A2KA.svg" alt="A2KA" width="1200"/>
+
+For a given protein segment, the significance of each signal peptide fragment varies depending on the function of interest. Let's first assume that an expert already possesses sufficient knowledge and understanding. When presented with a set of materials, the expert's gaze will naturally focus on areas of personal interest. Simultaneously, we can assume the presence of a recorder that logs and analyzes the frequency of these patterns, thereby reflecting the expert's attention distribution throughout the test.
+Now, let’s consider a different scenario: the expert's gaze is directed according to specific requirements. For example, if the task is to determine whether a protein is localized within the nucleus, the expert's attention will shift to focus on nucleus-related information.
+
+Our model operates under the assumption that language models possess a substantial amount of knowledge. In this context:
+
+The knowledgeable individual is replaced by a language model.
+The task presented to the language model is to identify nuclear localization proteins.
+The tools used to record the patterns are A2KA and SCNLS.
 
 ## Search and collect NLS (SCNLS) algorithm 
 SCNLS is designed for the pattern analysis of sequences, with its primary innovation being the ability to analyze discontinuous patterns. This feature is particularly important for the analysis of NLS patterns. The default mode extracts discontinuous patterns based on the input key segment sets. In addition to accepting file inputs, you can directly input a sequence of interest for pattern analysis (not limited to NLS; any sequence can be analyzed). By default, the top 10 most frequent patterns are displayed. This package should run in the linux system.
