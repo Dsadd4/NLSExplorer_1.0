@@ -85,9 +85,10 @@ SCNLS is designed for the pattern analysis of sequences, with its primary innova
 
 ```bash
 python SCNLS.py --mode f  --material example.csv --maxgap 3 --kths 3 --processor 3
-python SCNLS.py --mode n  --material 'Arabidopsis thaliana_0.5' --maxgap 3 --kths 3 --processor 10 
+python SCNLS.py --mode n  --material 'Arabidopsis thaliana_0.5' --maxgap 3 --kths 3 --processor 8 
 python SCNLS.py --mode s  --material KKKKRRRJJJJKSJSAIJCOSJAOJD --maxgap 3 --kths 3 --processor 1 
-
+#or you can indicate the entropy threshold for pattern
+python SCNLS.py --mode s  --material KKKKRRRJJrrJJccKSJSArrIJccCOSrrJAccOJDrrasccda --maxgap 3 --entropythreshold 0.5 --kths 3 --processor 1
 ```
 You can directly import SCNLS into your workflow by install A2KA
 

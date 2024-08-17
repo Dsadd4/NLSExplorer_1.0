@@ -187,12 +187,12 @@ def main():
     parser.add_argument('--maxgap', type=int, help='Maximum gap allowed (e.g., 5)')
     parser.add_argument('--kths', type=int, help='Threshold value (e.g., 3)')
     parser.add_argument('--processor', type=int, help='Number of processors to use (e.g., 10)')
-   
+    parser.add_argument('--entropythreshold', type=float,default=0, help='the entropy threshold')
 
     # Parse parameters
     args = parser.parse_args()
     #default entropy
-    entropthss = 0
+    entropthss = args.entropythreshold
     # Parameters usage
     print(f"Mode: {args.mode}")
     if args.mode == 'f':
@@ -246,4 +246,4 @@ if __name__ == "__main__":
 '''python SCNLS.py --mode s  --material "从上述的数据库的收集结果可以看出， 目前可靠的核定位信号的数目太少，这也是目前核定位 信号预测方面的主要难点之一。 本文我主要是要利用 NLSdb2003 版以及 NLSdb 2017 版的核定位信号数据库来构建基于核定位信号与非核定位信号的分类模型的数据集。" --maxgap 5 --kths
  5 --processor 1'''
 
-''' python SCNLS.py --mode s  --material KKKKRRRJJrrJJccKSJSArrIJccCOSrrJAccOJDrrasccda --maxgap 3 --kths 3 --processor 1 '''
+''' python SCNLS.py --mode s  --material KKKKRRRJJrrJJccKSJSArrIJccCOSrrJAccOJDrrasccda --maxgap 3 --entropythreshold 0 --kths 3 --processor 1 '''
