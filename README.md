@@ -94,6 +94,12 @@ The knowledgeable individual is replaced by a language model.
 The task presented to the language model is to identify nuclear localization proteins.
 The tools used to record the patterns are A2KA and SCNLS.
 
+## A2KA with slective strate
+<img src="./image/A2KACONTEPTI2.svg" alt="A2KA" width="1200"/>
+
+
+
+
 ## Search and collect NLS (SCNLS) algorithm 
 SCNLS is designed for the pattern analysis of sequences, with its primary innovation being the ability to analyze discontinuous patterns. This feature is particularly important for the analysis of NLS patterns. The default mode extracts discontinuous patterns based on the input key segment sets. In addition to accepting file inputs, you can directly input a sequence of interest for pattern analysis (not limited to NLS; any sequence can be analyzed). By default, the top 10 most frequent patterns are displayed. This package should run in the linux system.
 
