@@ -170,6 +170,63 @@ def function_mode(for_digg,k,maxl,processorsnumber,entropthss):
         if Show==0:
             break
 
+
+from collections import defaultdict
+def get_continuous_patterns(s):
+    substr_freq = defaultdict(int)
+    
+    for i in range(len(s)):
+        for j in range(i + 1, len(s) + 1):
+            substr_freq[s[i:j]] += 1
+    sorted_freq = sorted(substr_freq.items(), key=lambda x: x[1], reverse=True)
+   
+    ardicts = {substr: freq for substr, freq in sorted_freq}
+    return ardicts
+
+def merge_dictionaries(dict1, dict2):
+    # 创建一个新字典，用于存储合并后的结果
+    merged_dict = dict1.copy()
+    
+    for key, value in dict2.items():
+        if key in merged_dict:
+            merged_dict[key] += value  # 如果键存在，值相加
+        else:
+            merged_dict[key] = value  # 如果键不存在，直接添加
+    
+    return merged_dict
+def sort_dict_by_value(d, reverse=False):
+    # 使用 sorted() 函数按值排序，返回一个按键值对排序的列表
+    sorted_items = sorted(d.items(), key=lambda item: item[1], reverse=reverse)
+    
+    # 将排序后的键值对列表转换为字典
+    sorted_dict = dict(sorted_items)
+    
+    return sorted_dict
+
+def Continuous_mode(segment,cotsm= 10):
+    results_cd = {}
+    for strs in segment:
+        tmp = get_continuous_patterns(strs)
+        results_cd  = merge_dictionaries(results_cd , tmp)
+    # if ' ' in results_cd:
+    #     del results_cd[' ']
+    results_cd = sort_dict_by_value(results_cd, reverse=True)
+    cots = 0
+    for item in results_cd :
+        print(item)
+        print(results_cd[item])
+        if cots==cotsm:
+            break
+        cots+=1
+
+
+
+
+
+
+
+
+
 # SCNLS_N(transfered,f_ge,processorsnumber)
 
 # final_count = get_final_dic(transfered,f_ge,processorsnumber)
@@ -193,8 +250,10 @@ def main():
     args = parser.parse_args()
     #default entropy
     entropthss = args.entropythreshold
+    
     # Parameters usage
     print(f"Mode: {args.mode}")
+    # Continueous segment extraction
     if args.mode == 'f':
         # for_digg = ['MQAKINSFFKPSSSSSGQSDFLLRHCAECGAKYAPGDELDEKNHQSFHKDYMYGLPFKGWQNEKAFTSPLKAQLIDTHFS',
         #             'FIKNRIVMVSENDSPAHRNKVQEVVKMMEVELGEDWILHQHCKVYLFISSQRISGCLVAEPIKEAFKLIASPDDERQLQKESSSSPSTSIQFGNIVLQREVSKRCRTSDDRLDNGVIVCEEEAKPAVCGIRAIWVSPSNRRKGIATWLLDTTRESFCNNGCMLEKSQLAFSQPSSIGRSFGSKYFGTCSFLLY',
@@ -205,14 +264,21 @@ def main():
         segment = list(data['Recommended Segment'])
         # print(segment)
         # assert(0)
+        print('Discontinous mode')
         function_mode(segment, args.kths, args.maxgap, args.processor,entropthss)
+        print('--------------------')
+        print('Continous mode')
+        Continuous_mode(segment,10)
     elif args.mode == 's':
         # if not args.segment:
         #     parser.error("--segment is required when mode is 's'")
 
         for_digg = [args.material]
+        print('Discontinous mode')
         function_mode(for_digg, args.kths, args.maxgap, args.processor,entropthss)
-
+        print('--------------------')
+        print('Continous mode')
+        Continuous_mode(for_digg,10)
     elif args.mode == 'n':
         from utils import load_mydict
         path = args.material
@@ -226,7 +292,11 @@ def main():
             segmetl = pos2seg(seq,segls)
             transfered+=  segmetl
         # print(transfered)
+        print('Discontinous mode')
         function_mode(transfered, args.kths, args.maxgap, args.processor,entropthss)
+        print('--------------------')
+        print('Continous mode')
+        Continuous_mode(transfered,10)
         pass
     else:
         parser.error(f"Invalid mode: {args.mode}")

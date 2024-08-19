@@ -78,7 +78,11 @@ print(prediction)
 print(layerattention)
 
 ```
-## Attention adapts to all you need 
+<h2>
+    <img src="./image/A2KA_logo.webp" alt="A2KA" width="100" style="vertical-align: middle;"/>
+    <span style="vertical-align: middle;">Attention adapts to all you need</span>
+</h2>
+
 <img src="./image/Conception_A2KA.svg" alt="A2KA" width="1200"/>
 
 For a given protein segment, the significance of each signal peptide fragment varies depending on the function of interest. Let's first assume that an expert already possesses sufficient knowledge and understanding. When presented with a set of materials, the expert's gaze will naturally focus on areas of personal interest. Simultaneously, we can assume the presence of a recorder that logs and analyzes the frequency of these patterns, thereby reflecting the expert's attention distribution throughout the test.
