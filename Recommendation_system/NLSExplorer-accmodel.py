@@ -268,7 +268,7 @@ class CustomDataset(Dataset):
                 print(f'This time labels are {ins_lab}')
                 for labb in ins_lab:
                     if ju_cover((genesampl[0]+1,genesampl[1]+1), labb):
-                        FLAG = 1
+                        Flags = 1
                 if Flags == 0:
                     break    
             balance_train.append(genesampl)
