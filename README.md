@@ -78,10 +78,10 @@ print(prediction)
 print(layerattention)
 
 ```
-<h2>
+<!-- <h2>
     <img src="./image/A2KA_logo.webp" alt="A2KA" width="100" style="vertical-align: middle;"/>
     <span style="vertical-align: middle;">Attention adapts to the need</span>
-</h2>
+</h2> -->
 
 <img src="./image/Conception_A2KA.svg" alt="A2KA" width="1200"/>
 
