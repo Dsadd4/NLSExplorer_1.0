@@ -15,7 +15,7 @@ Free online website with interactive maps and calculation service http://www.csb
 Ensure that Anaconda or Miniconda is installed.
 
 ## Python Environment Setup (using anaconda)
-If you have already installed pytorch with python version>=3.7 successfully, you can
+If you have already installed pytorch gpu version with python version>=3.7 successfully, you can
 skip this step. 
 
 ### 1. Create Python Environment
@@ -101,7 +101,8 @@ The tools used to record the patterns are A2KA and SCNLS.
 
 
 ## Search and collect NLS (SCNLS) algorithm 
-SCNLS is designed for the pattern analysis of sequences, with its primary innovation being the ability to analyze discontinuous patterns. This feature is particularly important for the analysis of NLS patterns. The default mode extracts discontinuous patterns based on the input key segment sets. In addition to accepting file inputs, you can directly input a sequence of interest for pattern analysis (not limited to NLS; any sequence can be analyzed). By default, the top 10 most frequent patterns are displayed. This package should run in the linux system.
+SCNLS is designed for the pattern analysis of sequences, with its primary innovation being the ability to analyze discontinuous patterns in characteristic motifs, such as NLSs. These discontinuous patterns emphasize the core segment of NLSs, which plays a crucial role in determining their function.
+<br>We provide several modes for running the SCNLS algorithm. In addition to specifying the input file path, you can directly input a sequence of interest for pattern analysis (any sequence can be analyzed). By default, the top 10 most frequent patterns are displayed. This package is designed to run on a Linux system to fully utilize multiprocessing capabilities.
 
 ```bash
 python SCNLS.py --mode f  --material example.csv --maxgap 3 --kths 3 --processor 3
