@@ -14,11 +14,11 @@ Free online website with interactive maps and calculation service http://www.csb
 ## Prerequisites
 Ensure that Anaconda or Miniconda is installed.
 
-## Python Environment Setup 
+## Python Environment Setup (using anaconda)
 If you have already installed pytorch with python version>=3.7 successfully, you can
 skip this step. 
 
-### 1. Create Python 3.7 Environment
+### 1. Create Python Environment
 ```bash
 conda create -n NLSExplorer-pyto python==3.7
 ```
