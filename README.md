@@ -115,7 +115,7 @@ The task presented to the language model is to identify nuclear localization pro
 We develop A2KA and SCNLS as the tools that used to record and analysis patterns.
 
 ## A2KA with slective strategy
-By strategically selecting the distribution of basic units within A2KA to aggregate an overall attention distribution, A2KA can be adapted to different tasks. For example, in the task of detecting NLS, the basic units that favor amino acids K and R are more effective at accurately identifying key points of NLS. Focusing on these specific units yields better performance than considering all units equally.
+By strategically selecting the distribution of basic units within A2KA to aggregate an overall attention distribution, A2KA can be adapted to different tasks. For example, in the task of detecting NLS, the basic units that favor amino acids K and R are more effective at accurately identifying key points of NLS. Focusing on these specific units yields better performance than composing all the attention distribution feedback together.
 <img src="./image/A2KACONTEPTI2.svg" alt="A2KA" width="1200"/>
 
 
