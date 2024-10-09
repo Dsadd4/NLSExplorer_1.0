@@ -54,13 +54,13 @@ A2KA is built upon a Deep Attention Network composed of basic attention units, a
 <div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
 
 <figure style="text-align: center;">
-    <img src="./sequence_VIS2.PNG" alt="Potential NLS universe" width="200"/>
-    <figcaption>Attention distribution</figcaption>
+    <img src="./sequence_VIS2.PNG" alt="Potential NLS universe" width="300"/>
+    <figcaption style="font-size: 8px;">Attention distribution</figcaption>
 </figure>
 
 <figure style="text-align: center;">
-    <img src="./sequence_VIS.PNG" alt="Potential NLS universe" width="200"/>
-    <figcaption>Sequence visulized by attention weight</figcaption>
+    <img src="./sequence_VIS.PNG" alt="Potential NLS universe" width="300"/>
+    <figcaption style="font-size: 8px;">Sequence visulized by attention weight</figcaption>
 </figure>
 
 </div>
