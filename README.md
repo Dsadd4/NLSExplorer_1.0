@@ -53,12 +53,12 @@ A2KA is built upon a Deep Attention Network composed of basic attention units, a
 2. Leverage attention maps from the model's attention mechanisms to identify critical regions in the input that significantly influence prediction outcomes. This approach provides a detailed profile of the model's focus across different parts of the input.
 <div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
 
-<figure style="text-align: center;">
+<figure >
     <img src="./sequence_VIS2.PNG" alt="Potential NLS universe" width="300"/>
     <figcaption style="font-size: 8px;">Attention distribution</figcaption>
 </figure>
 
-<figure style="text-align: center;">
+<figure >
     <img src="./sequence_VIS.PNG" alt="Potential NLS universe" width="300"/>
     <figcaption style="font-size: 8px;">Sequence visulized by attention weight</figcaption>
 </figure>
