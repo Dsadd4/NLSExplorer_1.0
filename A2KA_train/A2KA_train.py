@@ -241,7 +241,7 @@ def generate_train(nu_se,notnu_se):
     import random
     random.shuffle(notnu_se)
     random.shuffle(nu_se)
-    pos_seq = nu_se[0:15000]
+    pos_seq = nu_se
     neg_seq = notnu_se[:len(pos_seq)]
     y1=[1]*len(pos_seq)
     y2 = [0]*len(pos_seq)
@@ -259,7 +259,7 @@ train_total,y = generate_train(nu_se,notnu_se)
 augumentation = "tes"
 Batchsize=24
 optimizer = optim.Adam(model2.parameters(), lr=learning_rate)
-for stages in range(120):
+for stages in range(1,26):
             
     model2 = begin_train_dur(y,model2,optimizer,train_total,Batchsize,stages)
     if stages%5 == 0:
