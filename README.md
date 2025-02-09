@@ -166,6 +166,3 @@ If you find the models useful in your research, we ask that you cite the relevan
 ```
 
 
-## License <a name="license"></a>
-
-This source code is licensed under the MIT license.
