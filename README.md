@@ -159,9 +159,9 @@ If you find the models useful in your research, we ask that you cite the relevan
   author={Yi-Fan Li, Xiaoyong Pan, and Hong-Bin Shen},
   title={Discovering nuclear localization signal universe through a novel deep learning model with interpretable attention units},
   year={2024},
-  doi={https://doi.org/10.1101/2024.08.10.606103},
-  url={https://www.biorxiv.org/content/10.1101/2024.08.10.606103v1},
-  journal={}
+  doi={10.1016/j.patter.2025.101262},
+  url={https://www.cell.com/patterns/fulltext/S2666-3899(25)00110-2},
+  journal={patterns}
 }
 ```
 
