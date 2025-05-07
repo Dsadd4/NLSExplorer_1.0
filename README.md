@@ -10,6 +10,9 @@
 See the detailed introduction at http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/introduction_new.html
 <br>
 Free online website with interactive maps and calculation service http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/
+<br>
+Article link:
+https://www.cell.com/patterns/fulltext/S2666-3899(25)00110-2
 
 ## Prerequisites
 Ensure that Anaconda or Miniconda is installed.
