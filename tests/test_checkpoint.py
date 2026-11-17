@@ -216,3 +216,36 @@ def test_download_checkpoint_retries_and_resumes_dropped_connection(
 
     assert DroppedConnectionHandler.request_count == 2
     assert result.read_bytes() == content
+
+
+def test_download_accepts_legacy_non_zip_file_without_format_validator(
+    tmp_path: Path,
+) -> None:
+    content = b"legacy-pytorch-checkpoint" * 128
+
+    class LegacyHandler(BaseHTTPRequestHandler):
+        def do_GET(self) -> None:
+            self.send_response(200)
+            self.send_header("Content-Length", str(len(content)))
+            self.end_headers()
+            self.wfile.write(content)
+
+        def log_message(self, format: str, *args: object) -> None:
+            return
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), LegacyHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        destination = tmp_path / "legacy.pt"
+        result = download_checkpoint(
+            destination,
+            url=f"http://127.0.0.1:{server.server_port}/legacy",
+            validator=None,
+        )
+    finally:
+        server.shutdown()
+        thread.join()
+        server.server_close()
+
+    assert result.read_bytes() == content

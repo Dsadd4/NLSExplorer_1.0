@@ -227,6 +227,7 @@ def download_checkpoint(
     timeout: float = 30.0,
     max_retries: int = 10,
     retry_delay: float = 1.0,
+    validator: Callable[[Path], object] | None = require_intact_checkpoint,
 ) -> Path:
     """Download with HTTP Range resume and automatic recovery from stalled transfers."""
 
@@ -242,7 +243,8 @@ def download_checkpoint(
     destination_path.parent.mkdir(parents=True, exist_ok=True)
     if destination_path.exists():
         if not overwrite:
-            require_intact_checkpoint(destination_path)
+            if validator is not None:
+                validator(destination_path)
             return destination_path
         destination_path.unlink()
 
@@ -266,15 +268,28 @@ def download_checkpoint(
                     mode = "ab" if resumed_bytes else "wb"
                 total = _download_total(response, resumed_bytes)
                 downloaded = resumed_bytes
+                last_reported = downloaded
+                read_block = getattr(response, "read1", response.read)
                 with partial_path.open(mode) as output_file:
                     while True:
-                        block = response.read(chunk_size)
+                        # HTTPResponse.read(size) waits to fill the entire buffer and
+                        # can appear frozen on a connection that only trickles bytes.
+                        # read1 returns currently available data after one socket read,
+                        # allowing writes, progress updates, and idle timeouts to work.
+                        block = read_block(chunk_size)
                         if not block:
                             break
                         output_file.write(block)
                         downloaded += len(block)
-                        if progress is not None:
+                        if progress is not None and (
+                            downloaded - last_reported >= chunk_size
+                            or (total is not None and downloaded == total)
+                        ):
                             progress(downloaded, total)
+                            last_reported = downloaded
+
+                if progress is not None and downloaded != last_reported:
+                    progress(downloaded, total)
 
             if total is not None and downloaded != total:
                 raise _RetryableDownloadError(
@@ -286,7 +301,8 @@ def download_checkpoint(
                 content_range = error.headers.get("Content-Range", "")
                 total_text = content_range.rsplit("/", 1)[-1]
                 if total_text.isdigit() and resumed_bytes == int(total_text):
-                    require_intact_checkpoint(partial_path)
+                    if validator is not None:
+                        validator(partial_path)
                     partial_path.replace(destination_path)
                     return destination_path
             if error.code not in {408, 429} and error.code < 500:
@@ -312,7 +328,8 @@ def download_checkpoint(
         if retry_delay:
             time.sleep(retry_delay * failed_attempts)
 
-    require_intact_checkpoint(partial_path)
+    if validator is not None:
+        validator(partial_path)
     partial_path.replace(destination_path)
     return destination_path
 

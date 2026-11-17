@@ -70,6 +70,7 @@ def _download_esm(args: argparse.Namespace) -> int:
         url=ESM1B_URL,
         overwrite=args.overwrite,
         progress=_progress,
+        validator=None,
     )
     print(file=sys.stderr)
     download_checkpoint(
@@ -77,6 +78,7 @@ def _download_esm(args: argparse.Namespace) -> int:
         url=ESM1B_REGRESSION_URL,
         overwrite=args.overwrite,
         progress=_progress,
+        validator=None,
     )
     print(file=sys.stderr)
     print(model_path)

@@ -78,6 +78,10 @@ ESM checkpoints contain `argparse.Namespace`, so the explicit local ESM path is 
 `weights_only=False`. This exception is restricted to the ESM checkpoint the user explicitly
 supplies; the NLSExplorer state dict remains on `weights_only=True`.
 
+The official 7.83 GB ESM-1b file uses legacy PyTorch serialization rather than the ZIP64 layout
+used by the NLSExplorer checkpoint. Its downloader therefore verifies the completed HTTP transfer
+length but does not apply the NLSExplorer-specific ZIP member check.
+
 ## Verification
 
 Routine changes do not download multi-gigabyte files in CI. Required local checks are:

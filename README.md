@@ -88,7 +88,8 @@ Local prediction uses two released models:
 
 1. The lean NLSExplorer A2KA checkpoint, approximately 252 MB on disk.
 2. Meta ESM-1b, used to generate the 1,280-dimensional residue embeddings. Its official
-   checkpoint is approximately 7.83 GB, so allow enough disk space before downloading it.
+   checkpoint is approximately 7.83 GB. Allow at least 8 GB of disk space and approximately
+   12 GB of available memory for local ESM-1b loading and sequence inference.
 
 The original website checkpoint is approximately 2.88 GB because it contains 656 million
 parameters from an embedding layer that was declared but never called by the published forward
