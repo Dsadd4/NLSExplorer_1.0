@@ -105,7 +105,8 @@ nlsexplorer download-model
 nlsexplorer download-esm
 ```
 
-The downloader writes a `.part` file and resumes interrupted downloads with HTTP Range requests.
+The downloader writes a `.part` file, resumes interrupted downloads with HTTP Range requests, and
+automatically reconnects after stalled or incomplete transfers.
 By default, the final checkpoint is stored under `~/.cache/nlsexplorer/` (or
 `$XDG_CACHE_HOME/nlsexplorer/`).
 

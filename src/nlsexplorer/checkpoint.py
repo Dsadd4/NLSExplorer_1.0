@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import http.client
 import os
+import time
 import urllib.error
 import urllib.request
 import zipfile
@@ -59,6 +61,10 @@ class CheckpointFormatError(CheckpointError):
 
 class CheckpointCompatibilityError(CheckpointError):
     """Raised when checkpoint keys do not match the requested model."""
+
+
+class _RetryableDownloadError(CheckpointError):
+    """Internal signal for an interrupted but resumable transfer."""
 
 
 def _extracted_layout(path: Path) -> bool:
@@ -218,11 +224,20 @@ def download_checkpoint(
     chunk_size: int = 8 * 1024 * 1024,
     progress: Callable[[int, int | None], None] | None = None,
     overwrite: bool = False,
+    timeout: float = 30.0,
+    max_retries: int = 10,
+    retry_delay: float = 1.0,
 ) -> Path:
-    """Download a checkpoint with HTTP Range resume through ``<name>.part``."""
+    """Download with HTTP Range resume and automatic recovery from stalled transfers."""
 
     if chunk_size <= 0:
         raise ValueError("chunk_size must be positive")
+    if timeout <= 0:
+        raise ValueError("timeout must be positive")
+    if max_retries < 0:
+        raise ValueError("max_retries must be non-negative")
+    if retry_delay < 0:
+        raise ValueError("retry_delay must be non-negative")
     destination_path = Path(destination).expanduser().resolve()
     destination_path.parent.mkdir(parents=True, exist_ok=True)
     if destination_path.exists():
@@ -232,47 +247,71 @@ def download_checkpoint(
         destination_path.unlink()
 
     partial_path = destination_path.with_name(f"{destination_path.name}.part")
-    resumed_bytes = partial_path.stat().st_size if partial_path.exists() else 0
-    headers = {"User-Agent": "NLSExplorer checkpoint downloader"}
-    if resumed_bytes:
-        headers["Range"] = f"bytes={resumed_bytes}-"
+    failed_attempts = 0
+    while True:
+        resumed_bytes = partial_path.stat().st_size if partial_path.exists() else 0
+        headers = {"User-Agent": "NLSExplorer checkpoint downloader"}
+        if resumed_bytes:
+            headers["Range"] = f"bytes={resumed_bytes}-"
 
-    request = urllib.request.Request(url, headers=headers)
-    try:
-        response = urllib.request.urlopen(request)
-    except urllib.error.HTTPError as error:
-        if error.code == 416 and resumed_bytes:
-            content_range = error.headers.get("Content-Range", "")
-            total_text = content_range.rsplit("/", 1)[-1]
-            if total_text.isdigit() and resumed_bytes == int(total_text):
-                require_intact_checkpoint(partial_path)
-                partial_path.replace(destination_path)
-                return destination_path
-        raise CheckpointError(f"Checkpoint download failed: HTTP {error.code}") from error
+        request = urllib.request.Request(url, headers=headers)
+        try:
+            response = urllib.request.urlopen(request, timeout=timeout)
+            with response:
+                status = getattr(response, "status", response.getcode())
+                if resumed_bytes and status != 206:
+                    resumed_bytes = 0
+                    mode = "wb"
+                else:
+                    mode = "ab" if resumed_bytes else "wb"
+                total = _download_total(response, resumed_bytes)
+                downloaded = resumed_bytes
+                with partial_path.open(mode) as output_file:
+                    while True:
+                        block = response.read(chunk_size)
+                        if not block:
+                            break
+                        output_file.write(block)
+                        downloaded += len(block)
+                        if progress is not None:
+                            progress(downloaded, total)
 
-    with response:
-        status = getattr(response, "status", response.getcode())
-        if resumed_bytes and status != 206:
-            resumed_bytes = 0
-            mode = "wb"
-        else:
-            mode = "ab" if resumed_bytes else "wb"
-        total = _download_total(response, resumed_bytes)
-        downloaded = resumed_bytes
-        with partial_path.open(mode) as output_file:
-            while True:
-                block = response.read(chunk_size)
-                if not block:
-                    break
-                output_file.write(block)
-                downloaded += len(block)
-                if progress is not None:
-                    progress(downloaded, total)
+            if total is not None and downloaded != total:
+                raise _RetryableDownloadError(
+                    f"transfer stopped at {downloaded} of {total} bytes"
+                )
+            break
+        except urllib.error.HTTPError as error:
+            if error.code == 416 and resumed_bytes:
+                content_range = error.headers.get("Content-Range", "")
+                total_text = content_range.rsplit("/", 1)[-1]
+                if total_text.isdigit() and resumed_bytes == int(total_text):
+                    require_intact_checkpoint(partial_path)
+                    partial_path.replace(destination_path)
+                    return destination_path
+            if error.code not in {408, 429} and error.code < 500:
+                raise CheckpointError(
+                    f"Checkpoint download failed: HTTP {error.code}"
+                ) from error
+            retryable_error: Exception = error
+        except (
+            TimeoutError,
+            urllib.error.URLError,
+            http.client.IncompleteRead,
+            ConnectionError,
+            _RetryableDownloadError,
+        ) as error:
+            retryable_error = error
 
-    if total is not None and downloaded != total:
-        raise CheckpointError(
-            f"Download stopped at {downloaded} of {total} bytes; rerun to resume."
-        )
+        if failed_attempts >= max_retries:
+            raise CheckpointError(
+                f"Checkpoint download failed after {failed_attempts + 1} attempts; "
+                f"rerun to resume {partial_path}. Last error: {retryable_error}"
+            ) from retryable_error
+        failed_attempts += 1
+        if retry_delay:
+            time.sleep(retry_delay * failed_attempts)
+
     require_intact_checkpoint(partial_path)
     partial_path.replace(destination_path)
     return destination_path

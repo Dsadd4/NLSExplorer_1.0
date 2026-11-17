@@ -27,8 +27,9 @@ nlsexplorer recover-checkpoint /path/to/extracted-directory --output recovered.p
 nlsexplorer optimize-checkpoint recovered.pt --output NLSExplorer_A2KA_v1.1.0.pt
 ```
 
-The downloader keeps a `.part` file and uses HTTP Range requests on the next run. Do not add a
-second download implementation without preserving resumability.
+The downloader keeps a `.part` file, automatically reconnects after a stalled or incomplete
+transfer, and uses HTTP Range requests to continue at the last written byte. Do not add a second
+download implementation without preserving resumability and retry behavior.
 
 ## Why the lean loader removes `*.ll.weight`
 

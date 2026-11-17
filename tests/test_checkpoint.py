@@ -158,3 +158,61 @@ def test_download_checkpoint_resumes_part_file(tmp_path: Path) -> None:
     assert result.read_bytes() == content
     assert not partial.exists()
     assert progress[-1] == (len(content), len(content))
+
+
+def test_download_checkpoint_retries_and_resumes_dropped_connection(
+    tmp_path: Path,
+) -> None:
+    buffer = io.BytesIO()
+    torch.save({"weight": torch.arange(2048)}, buffer)
+    content = buffer.getvalue()
+
+    class DroppedConnectionHandler(BaseHTTPRequestHandler):
+        request_count = 0
+
+        def do_GET(self) -> None:
+            type(self).request_count += 1
+            range_header = self.headers.get("Range")
+            start = (
+                int(range_header.removeprefix("bytes=").removesuffix("-"))
+                if range_header
+                else 0
+            )
+            body = content[start:]
+            self.send_response(206 if range_header else 200)
+            self.send_header("Content-Length", str(len(body)))
+            if range_header:
+                self.send_header(
+                    "Content-Range",
+                    f"bytes {start}-{len(content) - 1}/{len(content)}",
+                )
+            self.end_headers()
+            if type(self).request_count == 1:
+                self.wfile.write(body[: len(body) // 2])
+                self.wfile.flush()
+                self.close_connection = True
+            else:
+                self.wfile.write(body)
+
+        def log_message(self, format: str, *args: object) -> None:
+            return
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), DroppedConnectionHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        destination = tmp_path / "checkpoint.pt"
+        result = download_checkpoint(
+            destination,
+            url=f"http://127.0.0.1:{server.server_port}/checkpoint",
+            chunk_size=257,
+            max_retries=2,
+            retry_delay=0,
+        )
+    finally:
+        server.shutdown()
+        thread.join()
+        server.server_close()
+
+    assert DroppedConnectionHandler.request_count == 2
+    assert result.read_bytes() == content
