@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nlsexplorer"
+version = "1.1.0"
+description = "Nuclear localization signal prediction and interpretable A2KA analysis"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "LicenseRef-NLSExplorer-Academic"
+license-files = ["LICENSE"]
+authors = [{ name = "Yifan Li" }]
+keywords = ["bioinformatics", "deep-learning", "nuclear-localization-signal", "proteins"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+  "numpy>=1.24",
+  "torch>=2.1",
+]
+
+[project.urls]
+Homepage = "http://www.csbio.sjtu.edu.cn/bioinf/NLSExplorer/"
+Repository = "https://github.com/Dsadd4/NLSExplorer_1.0"
+Issues = "https://github.com/Dsadd4/NLSExplorer_1.0/issues"
+Publication = "https://doi.org/10.1016/j.patter.2025.101262"
+
+[project.optional-dependencies]
+inference = [
+  "fair-esm>=2.0",
+]
+dev = [
+  "pytest>=8",
+  "pytest-cov>=5",
+  "ruff>=0.8",
+]
+
+[project.scripts]
+nlsexplorer = "nlsexplorer.cli:main"
+scnls = "nlsexplorer.scnls:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+nlsexplorer = ["data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

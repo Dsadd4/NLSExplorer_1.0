@@ -1,0 +1,8 @@
+name: nlsexplorer
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip>=23
+  - pip:
+      - -e .[inference,dev]

@@ -1,0 +1,39 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Environments and packaging output
+.venv/
+venv/
+env/
+.python-version
+build/
+dist/
+*.egg-info/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Downloaded model weights and local caches
+.cache/
+models/NLS_loc_modeltes
+models/NLS_loc_modeltes.pt
+Recommendation_system/NLS_loc_modeltes
+Recommendation_system/NLS_loc_modeltes.pt
+NLSEXplorer_A2KA/NLS_loc_modeltes
+NLSEXplorer_A2KA/NLS_loc_modeltes.pt
+
+# Local prediction output
+outputs/
+predictions/
