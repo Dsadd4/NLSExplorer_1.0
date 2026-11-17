@@ -79,7 +79,8 @@ The historical `python SCNLS.py --mode s|f ...` commands are still accepted.
 Local prediction uses two released models:
 
 1. The lean NLSExplorer A2KA checkpoint, approximately 252 MB on disk.
-2. Meta ESM-1b, used to generate the 1,280-dimensional residue embeddings.
+2. Meta ESM-1b, used to generate the 1,280-dimensional residue embeddings. Its official
+   checkpoint is approximately 7.83 GB, so allow enough disk space before downloading it.
 
 The original website checkpoint is approximately 2.88 GB because it contains 656 million
 parameters from an embedding layer that was declared but never called by the published forward
