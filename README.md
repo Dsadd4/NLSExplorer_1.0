@@ -18,7 +18,15 @@ reproduction, but they are not required for normal prediction.
 NLSExplorer supports Python 3.10–3.12 and PyTorch 2.1 or newer.
 
 Install the PyTorch build appropriate for your CPU or CUDA system by following the
-[official PyTorch selector](https://pytorch.org/get-started/locally/), then install this repository:
+[official PyTorch selector](https://pytorch.org/get-started/locally/), then install the v1.1.0
+wheel directly:
+
+```bash
+python -m pip install \
+  "nlsexplorer[inference] @ https://github.com/Dsadd4/NLSExplorer_1.0/releases/download/v1.1.0/nlsexplorer-1.1.0-py3-none-any.whl"
+```
+
+For an editable source checkout:
 
 ```bash
 git clone https://github.com/Dsadd4/NLSExplorer_1.0.git
